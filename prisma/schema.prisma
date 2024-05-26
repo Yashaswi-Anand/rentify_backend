@@ -40,6 +40,21 @@ model properties {
   updated_at    DateTime       @default(now())
 }
 
+model favorite {
+  id            Int            @id @default(autoincrement())
+  state         String
+  region        String
+  nearby        String
+  apartment     apartment_type @default(room)
+  no_of_bedroom Int
+  price         String
+  description   String
+  seller_id     Int
+  buyer_id      Int
+  created_at    DateTime       @default(now())
+  updated_at    DateTime       @default(now())
+}
+
 enum user_role {
   buyer
   seller
