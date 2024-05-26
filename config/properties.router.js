@@ -8,7 +8,7 @@ router.post('/add_properties', propertiesController.addNewProperties);
 
 router.post('/update_properties', propertiesController.updateProperties);
 
-// router.post('/delete_properties', propertiesController.deleteProperties);
+router.post('/delete_properties', propertiesController.deleteProperties);
 
 // router.post('/get_favorite_properties', propertiesController.getProperties);
 

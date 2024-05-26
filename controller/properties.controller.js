@@ -54,4 +54,17 @@ module.exports = {
             serverResponses.errorResponse(res, error)
         }
     },
+
+    async deleteProperties(req, res, next) {
+        try {
+            const properties = await prisma.properties.delete({
+                where: {
+                    id: +req.query.properties_id
+                }
+            });
+            serverResponses.successResponse(res, "Properties Deleted Successfully", null)
+        } catch (error) {
+            serverResponses.errorResponse(res, error)
+        }
+    }
 }
