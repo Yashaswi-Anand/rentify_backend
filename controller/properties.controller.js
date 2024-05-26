@@ -47,7 +47,7 @@ module.exports = {
         try {
             const properties = await prisma.properties.update({
                 where: {
-                    id: +req.body.properties_id
+                    id: +req.query.properties_id
                 },
                 data: {
                     state: req.body.state,
