@@ -19,7 +19,7 @@ app.use(express.urlencoded({ limit: process.env.PAYLOAD_SIZE }));
 // app.use('/api/auth', auth_router)
 
 app.get("/", async (req, res) => {
-    res.json({ message: "alive renify" });
+    res.json({ message: "alive rentify" });
 });
 
 app.listen(port, () => {
