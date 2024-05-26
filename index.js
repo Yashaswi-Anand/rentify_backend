@@ -3,7 +3,7 @@ const cors = require('cors')
 const app = express();
 const port = process.env.PORT || 5000;
 const cookieParser = require('cookie-parser');
-// const auth_router = require('./config/auth.router')
+const auth_router = require('./config/auth.router')
 
 const cors_option = {
     origin: "*",
@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(express.json({ limit: process.env.PAYLOAD_SIZE }));
 app.use(express.urlencoded({ limit: process.env.PAYLOAD_SIZE }));
 
-// app.use('/api/auth', auth_router)
+app.use('/api/auth', auth_router)
 
 app.get("/", async (req, res) => {
     res.json({ message: "alive rentify" });
