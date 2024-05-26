@@ -84,7 +84,6 @@ module.exports = {
 
     async getSellerDetails(req, res, next) {
         try {
-            console.log(req.query);
             const seller_id = +req.query.seller_id
             const user_data = await prisma.users.findFirst({
                 where: {

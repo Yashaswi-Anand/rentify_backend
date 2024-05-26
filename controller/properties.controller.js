@@ -6,7 +6,6 @@ const util = require("../common/util");
 module.exports = {
     async getProperties(req, res, next) {
         try {
-            console.log(req.body);
             const apartment = util.getApartmentCondition('p', req.body.apartmentType);
             const state = util.getStateCondition('p', req.body.state);
             const region = util.getRegionCondition('p', req.body.region);
@@ -14,8 +13,7 @@ module.exports = {
 
             const properties = await prisma.$queryRaw`
             SELECT * FROM properties AS p
-            WHERE 1=1 ${apartment} ${no_of_bedroom} ${state} ${region}
-            `;
+            WHERE 1=1 ${apartment} ${no_of_bedroom} ${state} ${region}`;
 
             serverResponses.successResponse(res, "Properties Fetched Successfully", properties)
         } catch (error) {
