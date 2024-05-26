@@ -31,7 +31,7 @@ model properties {
   nearby        String
   apartment     apartment_type @default(room)
   no_of_bedroom Int
-  price         Int
+  price         String
   description   String
   favorite      Boolean        @default(false)
   deleted       Boolean        @default(false)

@@ -2,7 +2,7 @@ const prisma = require("../common/db.config");
 const serverResponses = require('../common/responses')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const salt_round  = 10;
+const salt_round = 10;
 
 module.exports = {
     async register(req, res, next) {
@@ -26,12 +26,12 @@ module.exports = {
 
             const user_registed_data = await prisma.users.create({
                 data: {
-                    first_name : body_data.first_name,
-                    last_name  : body_data.last_name,
-                    email      : body_data.email,
-                    phone      : body_data.phone,
-                    role       : body_data.role,
-                    password   : body_data.password
+                    first_name: body_data.first_name,
+                    last_name: body_data.last_name,
+                    email: body_data.email,
+                    phone: body_data.phone,
+                    role: body_data.role,
+                    password: body_data.password
                 }
             })
 
@@ -78,6 +78,23 @@ module.exports = {
             serverResponses.successResponse(res, "User Logged In Successfully", user_data)
         }
         catch (error) {
+            serverResponses.errorResponse(res, error.message, 'unable to fetch scans')
+        }
+    },
+
+    async getSellerDetails(req, res, next) {
+        try {
+            console.log(req.query);
+            const seller_id = +req.query.seller_id
+            const user_data = await prisma.users.findFirst({
+                where: {
+                    id: seller_id
+                }
+            })
+            delete user_data.password
+            serverResponses.successResponse(res, "Seller Detail Fetched Successfully", user_data)
+
+        } catch (error) {
             serverResponses.errorResponse(res, error.message, 'unable to fetch scans')
         }
     }

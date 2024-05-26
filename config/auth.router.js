@@ -6,4 +6,6 @@ router.post('/register', authController.register);
 
 router.post('/login', authController.login);
 
+router.post('/get_seller_details', authController.getSellerDetails);
+
 module.exports = router;
