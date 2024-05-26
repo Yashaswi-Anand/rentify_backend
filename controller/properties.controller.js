@@ -1,10 +1,22 @@
+const { Prisma } = require("@prisma/client");
 const prisma = require("../common/db.config");
-const serverResponses = require('../common/responses')
+const serverResponses = require('../common/responses');
+const util = require("../common/util");
 
 module.exports = {
     async getProperties(req, res, next) {
         try {
-            const properties = await prisma.properties.findMany();
+            console.log(req.body);
+            const apartment = util.getApartmentCondition('p', req.body.apartmentType);
+            const state = util.getStateCondition('p', req.body.state);
+            const region = util.getRegionCondition('p', req.body.region);
+            const no_of_bedroom = util.getBedRoomCondition('p', +req.body.no_of_bedroom);
+
+            const properties = await prisma.$queryRaw`
+            SELECT * FROM properties AS p
+            WHERE 1=1 ${apartment} ${no_of_bedroom} ${state} ${region}
+            `;
+
             serverResponses.successResponse(res, "Properties Fetched Successfully", properties)
         } catch (error) {
             serverResponses.errorResponse(res, error)
@@ -13,7 +25,6 @@ module.exports = {
 
     async addNewProperties(req, res, next) {
         try {
-            console.log(req.body);
             const properties = await prisma.properties.create({
                 data: {
                     state: req.body.state,
